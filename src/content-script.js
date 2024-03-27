@@ -2,17 +2,29 @@ const _browser = window.chrome ?? window.browser;
 // --- DO NOT MODIFY ABOVE THIS LINE ---
 
 document.addEventListener("keydown", (event) => {
+  /**
+   * @type {string | undefined}
+   */
+  const vBeforePaste = document.activeElement.value;
+
   _browser.storage.local.get(["modifier"]).then(({ modifier }) => {
+    /**
+     * @type {"ctrl" | "meta"}
+     */
     const preferedModifier =
       modifier ?? (navigator.userAgent.match(/mac/i) ? "meta" : "ctrl");
 
-    if (event.key.toLowerCase() === "v" && event[`${preferedModifier}Key`]) {
-      pasteFromClipboard();
+    if (event.key?.toLowerCase() === "v" && event[`${preferedModifier}Key`]) {
+      pasteFromClipboard(vBeforePaste);
     }
   });
 });
 
-function pasteFromClipboard() {
+/**
+ * @param {string | undefined} vBeforePaste
+ * @returns {void}
+ */
+function pasteFromClipboard(vBeforePaste) {
   const supportedInputTypes = [
     "email",
     "number",
@@ -36,6 +48,10 @@ function pasteFromClipboard() {
     activeEl instanceof HTMLInputElement &&
     !supportedInputTypes.includes(activeEl.type)
   ) {
+    return;
+  }
+
+  if (vBeforePaste !== activeEl.value) {
     return;
   }
 

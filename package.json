@@ -1,6 +1,6 @@
 {
   "name": "f_u-paste-me",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "scripts": {
     "build:chrome": "./build.sh chrome",
     "build:firefox": "./build.sh firefox",

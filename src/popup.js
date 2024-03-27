@@ -4,6 +4,9 @@ const _browser = window.chrome ?? window.browser;
 const shortcuts = document.querySelectorAll("#shortcuts>kbd");
 
 _browser.storage.local.get(["modifier"]).then(({ modifier }) => {
+  /**
+   * @type {"ctrl" | "meta"}
+   */
   const preferedModifier =
     modifier ?? (navigator.userAgent.match(/mac/i) ? "meta" : "ctrl");
 
@@ -19,6 +22,9 @@ _browser.storage.local.get(["modifier"]).then(({ modifier }) => {
   });
 });
 
+/**
+ * @param {string} modifier
+ */
 function setPreferedModifier(modifier) {
   _browser.storage.local.set({ modifier });
 
