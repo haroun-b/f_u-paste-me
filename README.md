@@ -50,6 +50,21 @@ The directory holding the manifest file can be added as an extension in develope
 
 ---
 
+## Limitations
+
+- The extension only supports force pasting in the following input types:
+  - email
+  - number
+  - password
+  - search
+  - tel
+  - text
+  - url
+- Select and replace pasting works for all supported inputs except for **email** and **number**. This is due to `selectionStart` and `selectionEnd` being `null` on these types. So pasting anywhere in these fields would **_overwrite them_**.
+- Force pasting in paste-disabled fields doesn't work when the field contains text that is selected in its entirety. This a side effect of a safeguard put in place to avoid duplicate pasting in the very rare case where a paste-enabled field's text is selected in its entirety and replaced with the same text as before (therefore should remain unchanged). **If you ever face this issue, simply clear the field before pasting and it should work as expected**
+
+---
+
 ## Privacy
 
 This extension runs locally; connects to no external resources; and does not collect any data.

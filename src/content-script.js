@@ -65,6 +65,8 @@ function pasteFromClipboard(vBeforePaste, isReplace) {
     return;
   }
 
+  // checks if paste already happened
+  // avoids duplicate pasting in paste-enabled inputs
   if (vBeforePaste !== activeEl.value || isReplace) {
     return;
   }
@@ -72,13 +74,18 @@ function pasteFromClipboard(vBeforePaste, isReplace) {
   navigator.clipboard.readText().then((text) => {
     const { value, selectionStart, selectionEnd } = activeEl;
 
-    activeEl.value = value
-      .slice(0, selectionStart)
-      .concat(text, value.slice(selectionEnd));
+    // selectionStart and selectionEnd are null on: email and number inputs
+    if (selectionStart != null && selectionEnd != null) {
+      activeEl.value = value
+        .slice(0, selectionStart)
+        .concat(text, value.slice(selectionEnd));
 
-    const newCursorPos = selectionStart + text.length;
-    activeEl.selectionStart = newCursorPos;
-    activeEl.selectionEnd = newCursorPos;
+      const newCursorPos = selectionStart + text.length;
+      activeEl.selectionStart = newCursorPos;
+      activeEl.selectionEnd = newCursorPos;
+    } else {
+      activeEl.value = text;
+    }
 
     // input and change events are fired so as to not break any functionality dependant on them, e.g. React controlled components
     const eventProps = { bubbles: true, cancelable: false };
