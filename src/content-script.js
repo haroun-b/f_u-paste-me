@@ -7,6 +7,19 @@ document.addEventListener("keydown", (event) => {
    */
   const vBeforePaste = document.activeElement.value;
 
+  /**
+   * @type {{
+   * selectionStart: number | null | undefined,
+   * selectionEnd: number | null | undefined
+   * }}
+   */
+  const { selectionStart, selectionEnd } = document.activeElement;
+  const isReplace =
+    typeof vBeforePaste === "string" &&
+    selectionStart !== selectionEnd &&
+    selectionStart === 0 &&
+    selectionEnd === vBeforePaste.length;
+
   _browser.storage.local.get(["modifier"]).then(({ modifier }) => {
     /**
      * @type {"ctrl" | "meta"}
@@ -15,16 +28,17 @@ document.addEventListener("keydown", (event) => {
       modifier ?? (navigator.userAgent.match(/mac/i) ? "meta" : "ctrl");
 
     if (event.key?.toLowerCase() === "v" && event[`${preferedModifier}Key`]) {
-      pasteFromClipboard(vBeforePaste);
+      pasteFromClipboard(vBeforePaste, isReplace);
     }
   });
 });
 
 /**
  * @param {string | undefined} vBeforePaste
+ * @param {boolean} isReplace
  * @returns {void}
  */
-function pasteFromClipboard(vBeforePaste) {
+function pasteFromClipboard(vBeforePaste, isReplace) {
   const supportedInputTypes = [
     "email",
     "number",
@@ -51,7 +65,7 @@ function pasteFromClipboard(vBeforePaste) {
     return;
   }
 
-  if (vBeforePaste !== activeEl.value) {
+  if (vBeforePaste !== activeEl.value || isReplace) {
     return;
   }
 
