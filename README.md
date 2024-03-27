@@ -6,7 +6,7 @@
 
 **F_U Paste Me** is a simple browser extension that allows pasting in input fields, ~~even~~ especially in fields where pasting has been disabled.
 
-Made in a couple of hours out of frustration to improve user experience and allow pasting complex passwords copied from password managers for when autofill isn’t fully supported.
+Made ~~in a couple of hours~~ out of frustration to improve user experience and allow pasting complex passwords copied from password managers for when autofill isn’t fully supported.
 
 The paste shortcut is preset based on the user’s device, `⌘Cmd + V` for Mac, and `Ctrl + V` for Windows and Linux, but it can also be modified to suit individual preferences.
 
