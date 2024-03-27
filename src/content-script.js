@@ -56,7 +56,15 @@ function pasteFromClipboard(vBeforePaste) {
   }
 
   navigator.clipboard.readText().then((text) => {
-    activeEl.value += text;
+    const { value, selectionStart, selectionEnd } = activeEl;
+
+    activeEl.value = value
+      .slice(0, selectionStart)
+      .concat(text, value.slice(selectionEnd));
+
+    const newCursorPos = selectionStart + text.length;
+    activeEl.selectionStart = newCursorPos;
+    activeEl.selectionEnd = newCursorPos;
 
     // input and change events are fired so as to not break any functionality dependant on them, e.g. React controlled components
     const eventProps = { bubbles: true, cancelable: false };
