@@ -18,6 +18,10 @@
       color: #D93526;
     }
 
+    hgroup>p {
+      margin-top: .25rem;
+    }
+
     #shortcuts {
       display: flex;
       justify-content: center;
@@ -39,7 +43,10 @@
 
 <body>
   <main class="container">
-    <h1>F_U <span>Paste</span> Me</h1>
+    <hgroup>
+      <h1>F_U <span>Paste</span> Me</h1>
+      <p>Paste count: <ins><strong id="paste-count">0</strong></ins></p>
+    </hgroup>
 
     <article>
       <p>Choose which shortcut to force paste</p>

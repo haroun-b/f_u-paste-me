@@ -16,14 +16,14 @@ Works in most cases, but in case it doesn't, please feel free to open an issue o
 
 ## Demo
 
-<img src="./extras/demo.gif" alt="demo" width="100%" />
+https://github.com/haroun-b/f_u-paste-me/assets/81895619/41b91e18-6302-4535-94de-1e7bc8beb35c
 
 ---
 
 ## Installation
 
-<a href=""><img src="./extras/promote-button-chrome.png" alt="Available in the chrome web store" style="max-height: 6rem" /></a>
-<a href=""><img src="./extras/promote-button-firefox.png" alt="Get the add-on" style="max-height: 6rem" /></a>
+<a href="https://chromewebstore.google.com/detail/fu-paste-me/hfdmdffnljpbadookgmcclooanphdnkl"><img src="./extras/promote-button-chrome.png" alt="Available in the chrome web store" style="max-height: 6rem" /></a>
+<a href="https://addons.mozilla.org/addon/f_u-paste-me"><img src="./extras/promote-button-firefox.png" alt="Get the add-on" style="max-height: 6rem" /></a>
 
 ### From source
 

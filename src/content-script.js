@@ -2,43 +2,51 @@ const _browser = window.chrome ?? window.browser;
 // --- DO NOT MODIFY ABOVE THIS LINE ---
 
 document.addEventListener("keydown", (event) => {
-  /**
-   * @type {string | undefined}
-   */
-  const vBeforePaste = document.activeElement.value;
+  if ((!event.metaKey && !event.ctrlKey) || event.key?.toLowerCase() !== "v") {
+    return;
+  }
 
   /**
    * @type {{
+   * value: string | undefined,
    * selectionStart: number | null | undefined,
    * selectionEnd: number | null | undefined
    * }}
    */
-  const { selectionStart, selectionEnd } = document.activeElement;
+  const {
+    value: vBeforePaste,
+    selectionStart,
+    selectionEnd
+  } = document.activeElement;
+
   const isReplace =
     typeof vBeforePaste === "string" &&
     selectionStart !== selectionEnd &&
     selectionStart === 0 &&
     selectionEnd === vBeforePaste.length;
 
-  _browser.storage.local.get(["modifier"]).then(({ modifier }) => {
+  _browser.storage.local.get(["modifier", "pasteCount"]).then(
     /**
-     * @type {"ctrl" | "meta"}
+     * @type StorageGetCallback
      */
-    const preferedModifier =
-      modifier ?? (navigator.userAgent.match(/mac/i) ? "meta" : "ctrl");
+    ({ modifier, pasteCount }) => {
+      const preferedModifier =
+        modifier ?? (navigator.userAgent.match(/mac/i) ? "meta" : "ctrl");
 
-    if (event.key?.toLowerCase() === "v" && event[`${preferedModifier}Key`]) {
-      pasteFromClipboard(vBeforePaste, isReplace);
+      if (event[`${preferedModifier}Key`]) {
+        pasteFromClipboard(vBeforePaste, isReplace, pasteCount);
+      }
     }
-  });
+  );
 });
 
 /**
  * @param {string | undefined} vBeforePaste
  * @param {boolean} isReplace
+ * @param {number | undefined} pasteCount
  * @returns {void}
  */
-function pasteFromClipboard(vBeforePaste, isReplace) {
+function pasteFromClipboard(vBeforePaste, isReplace, pasteCount = 0) {
   const supportedInputTypes = [
     "email",
     "number",
@@ -84,6 +92,8 @@ function pasteFromClipboard(vBeforePaste, isReplace) {
       activeEl.selectionStart = newCursorPos;
       activeEl.selectionEnd = newCursorPos;
     } else {
+      if (activeEl.value === text) return;
+
       activeEl.value = text;
     }
 
@@ -91,5 +101,9 @@ function pasteFromClipboard(vBeforePaste, isReplace) {
     const eventProps = { bubbles: true, cancelable: false };
     activeEl.dispatchEvent(new Event("input", eventProps));
     activeEl.dispatchEvent(new Event("change", eventProps));
+
+    _browser.storage.local.set({
+      pasteCount: pasteCount + 1
+    });
   });
 }
