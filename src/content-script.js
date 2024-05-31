@@ -2,7 +2,11 @@ const _browser = window.chrome ?? window.browser;
 // --- DO NOT MODIFY ABOVE THIS LINE ---
 
 document.addEventListener("keydown", (event) => {
-  if ((!event.metaKey && !event.ctrlKey) || event.key?.toLowerCase() !== "v") {
+  if (
+    (!event.metaKey && !event.ctrlKey) ||
+    !event.shiftKey ||
+    event.key?.toLowerCase() !== "v"
+  ) {
     return;
   }
 
