@@ -8,7 +8,7 @@
 
 Made ~~in a couple of hours~~ out of frustration to improve user experience and allow pasting complex passwords copied from password managers for when autofill isn’t fully supported.
 
-The paste shortcut is preset based on the user’s device, `⌘Cmd + V` for Mac, and `Ctrl + V` for Windows and Linux, but it can also be modified to suit individual preferences.
+The paste shortcut is preset based on the user’s device, `⌘Cmd + Shift + V` for Mac, and `Ctrl + Shift + V` for Windows and Linux, but it can also be modified to suit individual preferences.
 
 Works in most cases, but in case it doesn't, please feel free to open an issue or maybe even fix it yourself you lazy bastard (if you know how, of course) 😁.
 

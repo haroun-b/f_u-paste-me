@@ -1,64 +1,83 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html
+  lang="en"
+  data-theme="dark"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      name="color-scheme"
+      content="dark"
+    />
+    <link
+      rel="stylesheet"
+      href="./pico.min.css"
+    />
+    <style>
+      h1,
+      p,
+      small {
+        text-wrap: nowrap;
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="dark" />
-  <link rel="stylesheet" href="./pico.min.css" />
-  <style>
-    h1,
-    p,
-    small {
-      text-wrap: nowrap;
-    }
+      h1 > span {
+        color: #d93526;
+      }
 
-    h1>span {
-      color: #D93526;
-    }
+      hgroup > p {
+        margin-top: 0.25rem;
+      }
 
-    hgroup>p {
-      margin-top: .25rem;
-    }
+      #shortcuts {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+      }
 
-    #shortcuts {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-    }
+      kbd {
+        cursor: pointer;
+        text-wrap: nowrap;
+      }
 
-    kbd {
-      cursor: pointer;
-    }
+      kbd:not(.selected) {
+        opacity: 0.5;
+      }
+    </style>
 
-    kbd:not(.selected) {
-      opacity: 0.5;
-    }
-  </style>
+    <script
+      defer
+      src="./popup.js"
+    ></script>
+    <title>F_U Paste Me</title>
+  </head>
 
-  <script defer src="./popup.js"></script>
-  <title>F_U Paste Me</title>
-</head>
+  <body>
+    <main class="container">
+      <hgroup>
+        <h1>F_U <span>Paste</span> Me</h1>
+        <p>
+          Paste count: <ins><strong id="paste-count">0</strong></ins>
+        </p>
+      </hgroup>
 
-<body>
-  <main class="container">
-    <hgroup>
-      <h1>F_U <span>Paste</span> Me</h1>
-      <p>Paste count: <ins><strong id="paste-count">0</strong></ins></p>
-    </hgroup>
+      <article>
+        <p>Choose which shortcut to force paste</p>
 
-    <article>
-      <p>Choose which shortcut to force paste</p>
+        <div id="shortcuts">
+          <kbd data-modifier="meta">Meta + Shift + V</kbd>
+          <kbd data-modifier="ctrl">Ctrl + Shift + V</kbd>
+        </div>
+      </article>
 
-      <div id="shortcuts">
-        <kbd data-modifier="meta">Meta + V</kbd>
-        <kbd data-modifier="ctrl">Ctrl + V</kbd>
-      </div>
-    </article>
-
-    <small>*Meta is the equivalent of <strong>Cmd</strong> on Mac</small>
-  </main>
-</body>
-
+      <small>*Meta is the equivalent of <strong>Cmd</strong> on Mac</small>
+    </main>
+  </body>
 </html>
