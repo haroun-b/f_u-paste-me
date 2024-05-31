@@ -16,7 +16,7 @@ Works in most cases, but in case it doesn't, please feel free to open an issue o
 
 ## Demo
 
-https://github.com/haroun-b/f_u-paste-me/assets/81895619/41b91e18-6302-4535-94de-1e7bc8beb35c
+https://github.com/haroun-b/f_u-paste-me/assets/81895619/708f0338-00d7-4425-b184-1d3ffa0aac3e
 
 ---
 
